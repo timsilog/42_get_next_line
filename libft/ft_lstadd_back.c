@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 11:28:52 by tjose             #+#    #+#             */
-/*   Updated: 2016/12/22 18:03:35 by tjose            ###   ########.fr       */
+/*   Created: 2016/12/19 17:13:09 by tjose             #+#    #+#             */
+/*   Updated: 2016/12/20 11:13:43 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	size_t				i;
-	const unsigned char	*a1;
-	const unsigned char	*a2;
+	t_list *head;
 
-	if ((s1 == NULL && s2 == NULL) || !n)
-		return (0);
-	a1 = (const unsigned char*)s1;
-	a2 = (const unsigned char*)s2;
-	i = 0;
-	while (a1[i] == a2[i] && i < n)
+	if (!alst || !new)
+		return ;
+	if (!*alst)
 	{
-		i++;
-		if (i == n)
-			return (0);
+		*alst = new;
+		return ;
 	}
-	return (a1[i] - a2[i]);
+	head = *alst;
+	while ((*alst)->next)
+		*alst = (*alst)->next;
+	(*alst)->next = new;
+	*alst = head;
 }

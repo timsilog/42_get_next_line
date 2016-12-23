@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjose <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 11:28:52 by tjose             #+#    #+#             */
-/*   Updated: 2016/12/22 18:03:35 by tjose            ###   ########.fr       */
+/*   Created: 2016/12/19 12:37:17 by tjose             #+#    #+#             */
+/*   Updated: 2016/12/22 17:54:03 by tjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 1000
+# include "../libft/libft.h"
+# include "fcntl.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+typedef struct		s_files
 {
-	size_t				i;
-	const unsigned char	*a1;
-	const unsigned char	*a2;
+	int				fd;
+	char			*leftover;
+	struct s_files	*next;
+}					t_files;
+int					get_next_line(const int fd, char **line);
 
-	if ((s1 == NULL && s2 == NULL) || !n)
-		return (0);
-	a1 = (const unsigned char*)s1;
-	a2 = (const unsigned char*)s2;
-	i = 0;
-	while (a1[i] == a2[i] && i < n)
-	{
-		i++;
-		if (i == n)
-			return (0);
-	}
-	return (a1[i] - a2[i]);
-}
+#endif
